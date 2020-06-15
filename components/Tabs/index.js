@@ -18,6 +18,13 @@ axios
       topicDiv.classList.add("tab");
       topicDiv.textContent = topic;
       topicsDiv.appendChild(topicDiv);
+      topicDiv.addEventListener("click", (e) => {
+        const allCards = document.querySelectorAll(`div.card`);
+        allCards.forEach((card) => (card.style.display = "none"));
+        if (topic === "node.js") topic = "node";
+        const chosenCards = document.querySelectorAll(`[category=${topic}]`);
+        chosenCards.forEach((card) => (card.style.display = "block"));
+      });
     });
   })
   .catch((error) => console.log(`Error: `, error.message));

@@ -25,14 +25,15 @@ axios
   .get("https://lambda-times-backend.herokuapp.com/articles")
   .then(({ data: { articles } }) => {
     for (const category in articles) {
-      articles[category].forEach((article) => cards.appendChild(Cards(article)));
+      articles[category].forEach((article) => cards.appendChild(Cards(article, category)));
     }
   })
   .catch((error) => console.log(error));
 
-function Cards(article) {
+function Cards(article, category) {
   const card = document.createElement("div");
   card.classList.add("card");
+  card.setAttribute("category", category);
 
   const headline = document.createElement("div");
   headline.classList.add("headline");
