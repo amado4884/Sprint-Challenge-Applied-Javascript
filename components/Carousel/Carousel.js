@@ -17,3 +17,51 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+function Carousel() {
+  const images = ["mountains", "computer", "trees", "turntable"];
+
+  const carousel = document.createElement("div");
+  carousel.classList.add("carousel");
+
+  const leftButton = document.createElement("div");
+  leftButton.classList.add("left-button");
+  leftButton.textContent = " < ";
+  leftButton.addEventListener("click", (e) => {
+    let newIndex = parseInt(img.getAttribute("id")) - 1;
+    newIndex = newIndex < 0 ? images.length - 1 : newIndex;
+
+    img.classList.add("hidden");
+    setTimeout(() => {
+      img.src = `./assets/carousel/${images[newIndex]}.jpeg`;
+      img.setAttribute("id", newIndex);
+      img.classList.remove("hidden");
+    }, 500);
+  });
+  carousel.appendChild(leftButton);
+
+  const img = document.createElement("img");
+  img.src = `./assets/carousel/${images[0]}.jpeg`;
+  img.setAttribute("id", 0);
+  carousel.appendChild(img);
+
+  const rightButton = document.createElement("div");
+  rightButton.classList.add("right-button");
+  rightButton.textContent = " > ";
+  rightButton.addEventListener("click", (e) => {
+    let newIndex = parseInt(img.getAttribute("id")) + 1;
+    newIndex = newIndex > images.length - 1 ? 0 : newIndex;
+    img.classList.add("hidden");
+    setTimeout(() => {
+      img.src = `./assets/carousel/${images[newIndex]}.jpeg`;
+      img.setAttribute("id", newIndex);
+      img.classList.remove("hidden");
+    }, 500);
+  });
+  carousel.appendChild(rightButton);
+
+  return carousel;
+}
+
+const container = document.querySelector("div.carousel-container");
+container.appendChild(Carousel());
